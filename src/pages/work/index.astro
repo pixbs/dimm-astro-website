@@ -1,12 +1,13 @@
 ---
-import Hero from '../../components/Hero.astro'
-import Layout from '../../layouts/Layout.astro'
+import Hero from '@components/section/Hero.astro'
+import Layout from 'src/layouts/Layout.astro'
 ---
 
 <Layout title='Our Services'>
 	<Hero>
 		<h1 slot='title'>
-			My services <span class='opacity-60'>designed to help you succeed</span>
+			{'My services'}
+			<span class='opacity-60'>{'designed to help you succeed'}</span>
 		</h1>
 		<p>
 			We offer a range of services focusing on future-oriented methodologies

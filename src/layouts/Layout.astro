@@ -1,8 +1,7 @@
 ---
+import Footer from '@components/section/Footer.astro'
+import Header from '@components/section/Header.astro'
 import { ViewTransitions } from 'astro:transitions'
-import Footer from '../components/Footer.astro'
-import Header from '../components/Header.astro'
-import PageEnter from '../components/PageEnter.astro'
 
 interface Props {
 	title: string
@@ -28,7 +27,7 @@ const { title } = Astro.props
 			<slot />
 		</main>
 		<Footer />
-		<PageEnter />
+		<!-- <PageEnter /> -->
 	</body>
 </html>
 <style is:global>

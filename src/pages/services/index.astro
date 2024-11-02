@@ -1,0 +1,17 @@
+---
+import Hero from '../../components/Hero.astro'
+import Layout from '../../layouts/Layout.astro'
+---
+
+<Layout title='Our Services'>
+	<Hero>
+		<h1 slot='title'>
+			My services <span class='opacity-60'>designed to help you succeed</span>
+		</h1>
+		<p>
+			We offer a range of services focusing on future-oriented methodologies
+			such as human-centricity and lean development.
+		</p>
+		<a slot='button' href='/contact' class='btn'>Learn More</a>
+	</Hero>
+</Layout>

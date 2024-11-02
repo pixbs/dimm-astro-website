@@ -1,0 +1,16 @@
+---
+import Hero from '../../components/Hero.astro'
+import Layout from '../../layouts/Layout.astro'
+---
+
+<Layout title='Welcome to Contact'>
+	<Hero>
+		<h1 slot='title'>Get in touch with me</h1>
+		<p>
+			If you have any questions or just want to say hello, feel free to reach
+			out. I'm always open to discussing new projects, creative ideas, or
+			opportunities to be part of your vision.
+		</p>
+		<a slot='button' href='/contact'>Contact Me</a>
+	</Hero>
+</Layout>

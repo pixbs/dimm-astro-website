@@ -1,0 +1,15 @@
+---
+import Hero from '../components/Hero.astro'
+import Layout from '../layouts/Layout.astro'
+---
+
+<Layout title='Privacy Policy'>
+	<Hero>
+		<h1 slot='title'>Privacy Policy</h1>
+		<p>
+			Your privacy is important to us. This page explains how we handle your
+			personal information.
+		</p>
+		<a slot='button' href='/contact' class='btn'>Let&apos;s talk</a>
+	</Hero>
+</Layout>

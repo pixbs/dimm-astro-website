@@ -1,0 +1,18 @@
+---
+import Hero from '../components/Hero.astro'
+import Layout from '../layouts/Layout.astro'
+---
+
+<Layout title='Welcome to Astro.'>
+	<Hero>
+		<h1 slot='title'>
+			Hey, I&apos;m Dimm! <span class='opacity-60'>Software Developer</span>
+			and <span class='opacity-60'>UI/UX Designer</span>
+		</h1>
+		<p>
+			I focus on future-oriented methodologies such as human-centricity, and
+			lean development.
+		</p>
+		<a slot='button' href='/contact' class='btn'>Let&apos;s talk</a>
+	</Hero>
+</Layout>

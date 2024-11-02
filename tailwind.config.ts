@@ -1,8 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-	content: [
-		'./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}',
-	],
+	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
 		extend: {
 			spacing: {
@@ -46,7 +44,7 @@ export default {
 			},
 			animation: {
 				'fade-out': 'fade-out 1s ease-in-out',
-				'move-out': 'move-out 0.5s ease-in-out forwards',
+				'move-out': 'move-out 0.3s ease-in-out forwards',
 				'fade-in': 'fade-in 0.7s ease-in-out forwards',
 			},
 		},

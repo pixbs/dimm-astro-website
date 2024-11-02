@@ -1,0 +1,17 @@
+---
+const length = 9
+const indices = [...Array(length).keys()]
+---
+
+<div
+	class='pointer-events-none fixed inset-0 z-[999] flex-row items-stretch justify-stretch'
+>
+	{
+		indices.map((index) => (
+			<div
+				class={`h-full w-full animate-move-out border-b border-l border-background bg-[#111] ${index >= 4 ? 'max-md:hidden' : ''} ${index >= 5 ? 'max-lg:hidden' : ''}`}
+				style={`animation-delay: ${index * 0.08}s;`}
+			/>
+		))
+	}
+</div>

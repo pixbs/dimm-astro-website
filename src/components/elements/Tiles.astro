@@ -1,0 +1,64 @@
+<script>
+	const tileGrid = document.querySelector('.tile-grid')
+	const calculateTileAmount = () => {
+		if (!tileGrid) return 0
+
+		const tileSize =
+			(window.innerWidth / 100) *
+			parseFloat(
+				getComputedStyle(document.documentElement).getPropertyValue(
+					'--tile-size',
+				),
+			)
+		return Math.round(
+			(tileGrid.clientWidth * tileGrid.clientHeight) / (tileSize * tileSize),
+		)
+	}
+	const createTiles = () => {
+		console.log('create tiles')
+		if (!tileGrid) {
+			console.log('Tile grid not found')
+			return
+		}
+		while (tileGrid.firstChild) {
+			tileGrid.removeChild(tileGrid.firstChild)
+		}
+		const tileAmount = calculateTileAmount()
+		for (let i = 0; i < tileAmount; i++) {
+			const tile = document.createElement('div')
+			tile.classList.add('tile')
+			tileGrid.appendChild(tile)
+		}
+	}
+	const updateProximity = (x: number, y: number) => {
+		if (!tileGrid) return
+		const tiles = tileGrid.querySelectorAll('.tile') as NodeListOf<HTMLElement>
+		if (!tiles) return
+		tiles.forEach((tile) => {
+			const rect = tile.getBoundingClientRect()
+			const distance = Math.sqrt((x - rect.left) ** 2 + (y - rect.top) ** 2)
+			const radious = window.innerWidth > 1000 ? 3 : 2
+			tile.style.borderRadius = `${Math.max(100 - distance / radious, 0)}%`
+		})
+	}
+
+	window.addEventListener('resize', createTiles)
+	window.addEventListener('mousemove', (event) => {
+		updateProximity(event.clientX, event.clientY)
+	})
+	document.addEventListener('astro:page-load', () => {
+		createTiles()
+		console.log('page load')
+	})
+	createTiles()
+</script>
+
+<div
+	class='tile-grid absolute inset-0 -z-10 flex-wrap border-b border-b-backgroundSecondary bg-brand'
+>
+</div>
+<style is:global>
+	.tile {
+		@apply relative size-tile border-l border-t border-backgroundSecondary bg-background;
+	}
+</style>

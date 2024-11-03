@@ -1,0 +1,32 @@
+---
+import Behance from 'public/icons/logo/behance.svg'
+import LinkedIn from 'public/icons/logo/linkedin.svg'
+import Telegram from 'public/icons/logo/telegram.svg'
+---
+
+<a href='https://t.me/pixbs' class='button social' aria-label='telegram'>
+	<img {...Telegram} loading='lazy' alt='Visit Telegram profile' />
+</a>
+<a
+	href='https://www.behance.net/pixbs'
+	class='button social'
+	aria-label='behance'
+>
+	<img {...Behance} loading='lazy' alt='Visit Behance profile' />
+</a>
+<a
+	href='https://www.linkedin.com/in/pixbs/'
+	class='button social'
+	aria-label='linkedin'
+>
+	<img {...LinkedIn} loading='lazy' alt='Visit LinkedIn profile' />
+</a>
+
+<style>
+	a {
+		@apply w-tile !border-backgroundSecondary text-third text-foreground hover:!border-foreground;
+	}
+	img {
+		@apply w-third fill-foreground text-foreground invert;
+	}
+</style>

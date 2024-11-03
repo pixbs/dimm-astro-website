@@ -1,6 +1,7 @@
 ---
 import Footer from '@components/section/Footer.astro'
 import Header from '@components/section/Header.astro'
+import '@fontsource-variable/onest'
 import { ViewTransitions } from 'astro:transitions'
 
 interface Props {
@@ -11,7 +12,7 @@ const { title } = Astro.props
 ---
 
 <!doctype html>
-<html lang='en' transition:animate='initial'>
+<html lang='en'>
 	<head>
 		<meta charset='UTF-8' />
 		<meta name='description' content='Astro description' />
@@ -87,12 +88,12 @@ const { title } = Astro.props
 			}
 		}
 	}
-	* {
+	/* * {
 		margin: 0;
 		padding: 0;
 		box-sizing: border-box;
 		white-space: pre-line;
-	}
+	} */
 
 	div,
 	section,
@@ -113,7 +114,7 @@ const { title } = Astro.props
 		--background-secondary: #2d2d2d;
 		--foreground: white;
 		--brand: #f22f57;
-		font-family: 'Onest', sans-serif;
+		font-family: 'Onest Variable', sans-serif;
 		-ms-overflow-style: none;
 		scrollbar-width: none;
 	}

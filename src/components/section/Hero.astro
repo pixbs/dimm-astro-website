@@ -1,3 +1,7 @@
+---
+import Social from '@components/elements/Social.astro'
+---
+
 <section>
 	<div
 		class='hero cont-m justify-between gap-half border-b border-foreground pb-tile pt-double lg:gap-tile'
@@ -8,10 +12,13 @@
 		<div class='justify-between gap-half lg:flex-row lg:items-center'>
 			<slot class='animate-fade-in opacity-0 lg:h-auto lg:w-sextuple' />
 			<button
-				class='flex h-tile w-full animate-fade-in flex-row items-center justify-center gap-half rounded-full bg-foreground uppercase text-background opacity-0 lg:w-quad'
+				class='hidden h-tile w-full animate-fade-in flex-row items-center justify-center gap-half rounded-full bg-foreground uppercase text-background opacity-0 lg:w-quad'
 			>
 				<slot name='button' />
 			</button>
+			<div class='flex-row'>
+				<Social />
+			</div>
 		</div>
 	</div>
 </section>

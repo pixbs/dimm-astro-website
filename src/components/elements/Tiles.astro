@@ -43,8 +43,8 @@
 		tiles.forEach((tile) => {
 			const rect = tile.getBoundingClientRect()
 			const distance = Math.sqrt((x - rect.left) ** 2 + (y - rect.top) ** 2)
-			const radious = window.innerWidth > 1000 ? 3 : 1
-			tile.style.borderRadius = `${Math.max(100 - distance / radious, 0)}%`
+			const slope = Math.sqrt(window.innerWidth) / 20
+			tile.style.borderRadius = `${Math.max(100 - distance / slope, 0)}%`
 		})
 	}
 
@@ -54,11 +54,11 @@
 		const height = tileGrid.clientHeight
 		const offset = 100
 		const speed = width / 500
-		updateProximity(x, y)
-		x = (x + speed) % (width + offset)
+		updateProximity(x - offset, y - offset)
+		x = (x + speed) % (width + offset * 2)
 		y =
 			((Math.sin(x / (width / 5)) * height) / 3 + height / 2) %
-			(height + offset)
+			(height + offset * 2)
 
 		requestAnimationFrame(autoPlay)
 	}

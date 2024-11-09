@@ -1,5 +1,10 @@
 <script>
 	const tileGrid = document.querySelector('.tile-grid')
+	const tile = document.querySelector('.tile') as HTMLElement
+	let x = -200
+	let y = -200
+	const isMobile = navigator.maxTouchPoints > 0
+
 	const calculateTileAmount = () => {
 		if (!tileGrid) return 0
 
@@ -10,26 +15,27 @@
 					'--tile-size',
 				),
 			)
-		return Math.round(
+		return Math.ceil(
 			(tileGrid.clientWidth * tileGrid.clientHeight) / (tileSize * tileSize),
 		)
 	}
 	const createTiles = () => {
-		console.log('create tiles')
-		if (!tileGrid) {
+		if (!tileGrid || !tile) {
 			console.log('Tile grid not found')
 			return
 		}
-		while (tileGrid.firstChild) {
-			tileGrid.removeChild(tileGrid.firstChild)
+		tile.style.borderRadius = '0%'
+		while (tileGrid.childElementCount > 1) {
+			const tile = tileGrid.lastChild
+			if (!tile) break
+			tileGrid.removeChild(tile)
 		}
-		const tileAmount = calculateTileAmount()
-		for (let i = 0; i < tileAmount; i++) {
-			const tile = document.createElement('div')
-			tile.classList.add('tile')
-			tileGrid.appendChild(tile)
+		for (let i = 0; i < calculateTileAmount(); i++) {
+			const newTile = tile.cloneNode() as HTMLElement
+			tileGrid.appendChild(newTile)
 		}
 	}
+
 	const updateProximity = (x: number, y: number) => {
 		if (!tileGrid) return
 		const tiles = tileGrid.querySelectorAll('.tile') as NodeListOf<HTMLElement>
@@ -37,28 +43,57 @@
 		tiles.forEach((tile) => {
 			const rect = tile.getBoundingClientRect()
 			const distance = Math.sqrt((x - rect.left) ** 2 + (y - rect.top) ** 2)
-			const radious = window.innerWidth > 1000 ? 3 : 2
+			const radious = window.innerWidth > 1000 ? 3 : 1
 			tile.style.borderRadius = `${Math.max(100 - distance / radious, 0)}%`
 		})
 	}
 
-	window.addEventListener('resize', createTiles)
-	window.addEventListener('mousemove', (event) => {
-		updateProximity(event.clientX, event.clientY)
-	})
-	document.addEventListener('astro:page-load', () => {
+	const autoPlay = () => {
+		if (!tileGrid) return
+		const width = tileGrid.clientWidth
+		const height = tileGrid.clientHeight
+		const offset = 100
+		const speed = width / 500
+		updateProximity(x, y)
+		x = (x + speed) % (width + offset)
+		y =
+			((Math.sin(x / (width / 5)) * height) / 3 + height / 2) %
+			(height + offset)
+
+		requestAnimationFrame(autoPlay)
+	}
+
+	const onLoad = async () => {
 		createTiles()
-		console.log('page load')
-	})
-	createTiles()
+		if (!isMobile) return
+		await new Promise((resolve) => setTimeout(resolve, 3000))
+		autoPlay()
+	}
+	if (!isMobile) {
+		window.addEventListener('mousemove', (event) => {
+			x = event.clientX - 80
+			y = event.clientY - 80
+			updateProximity(x, y)
+		})
+	}
+
+	window.addEventListener('load', onLoad)
+	const observer = new ResizeObserver(createTiles)
+	if (tileGrid) observer.observe(tileGrid)
 </script>
 
 <div
-	class='tile-grid absolute inset-0 -z-10 flex-wrap border-b border-b-backgroundSecondary bg-brand'
+	class='tile-grid absolute inset-0 top-0 -z-10 max-w-[100vw] flex-wrap overflow-hidden border-b border-b-backgroundSecondary'
+	transition:persist
 >
+	<div class='tile'></div>
 </div>
-<style is:global>
+<style scoped>
 	.tile {
-		@apply relative size-tile border-l border-t border-backgroundSecondary bg-background;
+		@apply relative box-border size-tile border-l border-t border-backgroundSecondary bg-background;
+	}
+	.tile::before {
+		@apply absolute left-0 top-0 -z-10 size-tile border-none bg-brand;
+		content: '';
 	}
 </style>

@@ -15,6 +15,7 @@ export default {
 				sextuple: 'calc(var(--tile-size) * 6)',
 			},
 			colors: {
+				backgroundDark: '#111',
 				background: 'var(--background)',
 				foreground: 'var(--foreground)',
 				backgroundSecondary: 'var(--background-secondary)',

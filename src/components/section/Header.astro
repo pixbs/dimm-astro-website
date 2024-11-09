@@ -1,27 +1,8 @@
 ---
 import Logo from 'public/icons/logo/main.svg'
-
-const anim = {
-	old: {
-		name: 'bump',
-		duration: '0.5s',
-		easing: 'ease-in',
-		direction: 'reverse',
-	},
-	new: {
-		name: 'bump',
-		duration: '0.5s',
-		easing: 'ease-in-out',
-	},
-}
-
-const customTransition = {
-	forwards: anim,
-	backwards: anim,
-}
 ---
 
-<header transition:animate={customTransition}>
+<header transition:persist transition:name='header'>
 	<a href='/' class='logo' area-label='Return to home page'>
 		<span class='sr-only'>Return to home page</span>
 		<img {...Logo} class='w-full' alt='Dimm Kyselov logo' />

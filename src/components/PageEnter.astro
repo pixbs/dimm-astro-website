@@ -5,6 +5,8 @@ const indices = [...Array(length).keys()]
 
 <div
 	class='pointer-events-none fixed inset-0 z-[999] flex-row items-stretch justify-stretch'
+	transition:persist
+	transition:name='page-enter'
 >
 	{
 		indices.map((index) => (
